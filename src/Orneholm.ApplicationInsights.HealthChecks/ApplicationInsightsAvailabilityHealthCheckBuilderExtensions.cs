@@ -6,6 +6,24 @@ namespace Orneholm.ApplicationInsights.HealthChecks
 {
     public static class ApplicationInsightsAvailabilityHealthCheckBuilderExtensions
     {
+        public static IHealthChecksBuilder AddApplicationInsightsAvailabilityPublisher(this IHealthChecksBuilder builder)
+        {
+            return AddApplicationInsightsAvailabilityPublisher(builder, null);
+        }
+
+        public static IHealthChecksBuilder AddApplicationInsightsAvailabilityPublisher(this IHealthChecksBuilder builder, Action<ApplicationInsightsAvailibilityPublisherOptions> options)
+        {
+            if (options != null)
+            {
+                builder.Services.Configure(options);
+            }
+
+            builder.Services.AddSingleton<IHealthCheckPublisher, ApplicationInsightsAvailabilityPublisher>();
+
+            return builder;
+        }
+
+
         public static IHealthChecksBuilder AddApplicationInsightsAggregatedAvailabilityPublisher(this IHealthChecksBuilder builder)
         {
             return AddApplicationInsightsAggregatedAvailabilityPublisher(builder, null);

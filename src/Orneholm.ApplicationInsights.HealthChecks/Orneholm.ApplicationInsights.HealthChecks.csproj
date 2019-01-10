@@ -1,7 +1,39 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks Condition="'$(LibraryFrameworks)'==''">netstandard2.0</TargetFrameworks>
+    <TargetFrameworks Condition="'$(LibraryFrameworks)'!=''">$(LibraryFrameworks)</TargetFrameworks>
+    <TargetFrameworkIdentifier Condition="'$(_ShortFrameworkIdentifier)'=='net'">.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkIdentifier Condition="'$(_ShortFrameworkIdentifier)'=='netstandard'">.NETStandard</TargetFrameworkIdentifier>
+    <LangVersion>latest</LangVersion>
+    <NeutralLanguage>en</NeutralLanguage>
+    <NoWarn>1701;1702;1591</NoWarn>
+
+    <AssemblyName>Orneholm.ApplicationInsights.HealthChecks</AssemblyName>
+    <PackageId>Orneholm.ApplicationInsights.HealthChecks</PackageId>
+
+    <VersionPrefix>0.1.0</VersionPrefix>
+    <!--<VersionSuffix>rc-1</VersionSuffix>-->
+    <FileVersion Condition="'$(BUILD_BUILDNUMBER)' != ''">$(VersionPrefix).$(BUILD_BUILDNUMBER)</FileVersion>
+
+    <Description>Enable pushing of healt h checks reports from ASP.NET Core to Application Insights Av.</Description>
+    <PackageTags>aspnet;healtchecks;azure;applicationinsights;monitoring</PackageTags>
+
+    <Authors>Peter Örneholm</Authors>
+    <Copyright>Copyright © Peter Örneholm</Copyright>
+
+    <PackageProjectUrl>https://github.com/PeterOrneholm/Orneholm.ApplicationInsights</PackageProjectUrl>
+
+    <PackageLicenseUrl>https://raw.githubusercontent.com/PeterOrneholm/Orneholm.ApplicationInsights/master/LICENSE.md</PackageLicenseUrl>
+    <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
+
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/PeterOrneholm/Orneholm.ApplicationInsights.git</RepositoryUrl>
+
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
 
   <ItemGroup>

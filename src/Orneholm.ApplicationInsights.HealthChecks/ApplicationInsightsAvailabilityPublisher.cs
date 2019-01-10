@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.ApplicationInsights;
@@ -10,12 +8,12 @@ using Microsoft.Extensions.Options;
 
 namespace Orneholm.ApplicationInsights.HealthChecks
 {
-    public class ApplicationInsightsAggregatedAvailabilityPublisher : IHealthCheckPublisher
+    public class ApplicationInsightsAvailabilityPublisher : IHealthCheckPublisher
     {
         private readonly TelemetryClient _telemetryClient;
-        private readonly IOptions<ApplicationInsightsAggregatedAvailibilityPublisherOptions> _options;
+        private readonly IOptions<ApplicationInsightsAvailibilityPublisherOptions> _options;
 
-        public ApplicationInsightsAggregatedAvailabilityPublisher(TelemetryClient telemetryClient, IOptions<ApplicationInsightsAggregatedAvailibilityPublisherOptions> options)
+        public ApplicationInsightsAvailabilityPublisher(TelemetryClient telemetryClient, IOptions<ApplicationInsightsAvailibilityPublisherOptions> options)
         {
             _telemetryClient = telemetryClient;
             _options = options;
@@ -23,48 +21,46 @@ namespace Orneholm.ApplicationInsights.HealthChecks
 
         public Task PublishAsync(HealthReport report, CancellationToken cancellationToken)
         {
-            var availabilityTelemetry = new AvailabilityTelemetry
+            foreach (var entry in report.Entries)
             {
-                Timestamp = DateTimeOffset.UtcNow,
-
-                Duration = report.TotalDuration,
-                Success = GetSuccessStatus(report),
-
-                Name = _options.Value.TestName,
-                RunLocation = _options.Value.TestRunLocation
-            };
-
-            var testDurations = GetTestDurations(report);
-            foreach (var testDuration in testDurations)
-            {
-                availabilityTelemetry.Metrics.Add(testDuration);
+                var availabilityTelemetry = GetAvailabilityTelemetry(entry.Key, entry.Value);
+                _telemetryClient.TrackAvailability(availabilityTelemetry);
             }
-
-            var testStatuses = GetTestStatuses(report);
-            foreach (var testStatus in testStatuses)
-            {
-                availabilityTelemetry.Properties.Add(testStatus);
-            }
-
-            _telemetryClient.TrackAvailability(availabilityTelemetry);
 
             return Task.CompletedTask;
         }
 
-        private static Dictionary<string, string> GetTestStatuses(HealthReport report)
+        private AvailabilityTelemetry GetAvailabilityTelemetry(string name, HealthReportEntry entry)
         {
-            return report.Entries.ToDictionary(x => $"HealthCheck-Status-{x.Key}", x => x.Value.Status.ToString());
+            var availabilityTelemetry = new AvailabilityTelemetry
+            {
+                Timestamp = DateTimeOffset.UtcNow,
+
+                Duration = entry.Duration,
+                Success = GetSuccessFromStatus(entry.Status),
+
+                Name = $"{_options.Value.TestNamePrefix}{name}",
+                RunLocation = _options.Value.TestRunLocation,
+                Message = entry.Description
+            };
+
+            AddHealthReportEntryData(availabilityTelemetry, entry);
+
+            return availabilityTelemetry;
         }
 
-        private static Dictionary<string, double> GetTestDurations(HealthReport report)
+        private bool GetSuccessFromStatus(HealthStatus status)
         {
-            return report.Entries.ToDictionary(x => $"HealthCheck-Duration-{x.Key}", x => x.Value.Duration.TotalMilliseconds);
+            return status == HealthStatus.Healthy
+                   || _options.Value.TreatDegradedAsSuccess && status == HealthStatus.Degraded;
         }
 
-        private bool GetSuccessStatus(HealthReport report)
+        private static void AddHealthReportEntryData(AvailabilityTelemetry telemetry, HealthReportEntry entry)
         {
-            return report.Status == HealthStatus.Healthy
-                   || _options.Value.TreatDegradedAsSuccess && report.Status == HealthStatus.Degraded;
+            foreach (var data in entry.Data)
+            {
+                telemetry.Properties.Add($"HealthCheck-Data-{data.Key}", data.Value.ToString());
+            }
         }
     }
 }
