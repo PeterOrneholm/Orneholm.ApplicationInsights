@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orneholm.ApplicationInsights.HealthChecks.Sample", "samples\Orneholm.ApplicationInsights.HealthChecks.Sample\Orneholm.ApplicationInsights.HealthChecks.Sample.csproj", "{F568FC9C-6684-4A9E-AEAC-B6F17A8F8D01}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{DD2CFB0B-82A3-4D00-A745-573A2AB29A2B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{18774124-25D8-44FE-80DC-2CF88772BD8E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CB8CB1EB-3299-4A8E-A978-EC8EE3D70182}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{221D7791-8A3F-4914-A4A6-FFE86882512E}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE.md = LICENSE.md
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orneholm.ApplicationInsights.HealthChecks", "src\Orneholm.ApplicationInsights.HealthChecks\Orneholm.ApplicationInsights.HealthChecks.csproj", "{58853998-13F1-4AB4-A1A4-CEACF4F77084}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F568FC9C-6684-4A9E-AEAC-B6F17A8F8D01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F568FC9C-6684-4A9E-AEAC-B6F17A8F8D01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F568FC9C-6684-4A9E-AEAC-B6F17A8F8D01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F568FC9C-6684-4A9E-AEAC-B6F17A8F8D01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58853998-13F1-4AB4-A1A4-CEACF4F77084}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58853998-13F1-4AB4-A1A4-CEACF4F77084}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58853998-13F1-4AB4-A1A4-CEACF4F77084}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58853998-13F1-4AB4-A1A4-CEACF4F77084}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F568FC9C-6684-4A9E-AEAC-B6F17A8F8D01} = {DD2CFB0B-82A3-4D00-A745-573A2AB29A2B}
+		{58853998-13F1-4AB4-A1A4-CEACF4F77084} = {CB8CB1EB-3299-4A8E-A978-EC8EE3D70182}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A7354875-208C-4A57-913F-B0813D7091E6}
+	EndGlobalSection
+EndGlobal
