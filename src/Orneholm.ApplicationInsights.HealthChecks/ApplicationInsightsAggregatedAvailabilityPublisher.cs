@@ -23,6 +23,14 @@ namespace Orneholm.ApplicationInsights.HealthChecks
 
         public Task PublishAsync(HealthReport report, CancellationToken cancellationToken)
         {
+            var availabilityTelemetry = GetAvailabilityTelemetry(report);
+            _telemetryClient.TrackAvailability(availabilityTelemetry);
+
+            return Task.CompletedTask;
+        }
+
+        private AvailabilityTelemetry GetAvailabilityTelemetry(HealthReport report)
+        {
             var availabilityTelemetry = new AvailabilityTelemetry
             {
                 Timestamp = DateTimeOffset.UtcNow,
@@ -36,10 +44,8 @@ namespace Orneholm.ApplicationInsights.HealthChecks
 
             AddHealthChecksStatuses(availabilityTelemetry, report);
             AddHealthChecksDurations(availabilityTelemetry, report);
-
-            _telemetryClient.TrackAvailability(availabilityTelemetry);
-
-            return Task.CompletedTask;
+            
+            return availabilityTelemetry;
         }
 
         private bool GetSuccessFromStatus(HealthStatus status)

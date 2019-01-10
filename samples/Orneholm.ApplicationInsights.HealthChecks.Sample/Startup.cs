@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,6 +26,7 @@ namespace Orneholm.ApplicationInsights.HealthChecks.Sample
             services.AddHealthChecks()
                     .AddApplicationInsightsAggregatedAvailabilityPublisher()
                     .AddApplicationInsightsAvailabilityPublisher()
+                    .AddSqlServer("FAKE", name: "SqlServer")
                     .AddAsyncCheck("Sample1", async () =>
                     {
                         await Task.Delay(random.Next(10, 200));
@@ -39,12 +39,12 @@ namespace Orneholm.ApplicationInsights.HealthChecks.Sample
                     .AddAsyncCheck("Sample2", async () =>
                     {
                         await Task.Delay(random.Next(100, 500));
-                        return HealthCheckResult.Degraded();
+                        return HealthCheckResult.Degraded("Does not work 100%");
                     })
                     .AddAsyncCheck("Sample3", async () =>
                     {
                         await Task.Delay(random.Next(200, 800));
-                        return HealthCheckResult.Unhealthy();
+                        return HealthCheckResult.Unhealthy("Something is broken");
                     });
         }
 
