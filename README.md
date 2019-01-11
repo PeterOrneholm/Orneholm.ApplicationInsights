@@ -48,7 +48,7 @@ You can customize some options, by using an overload:
     options.TestRunLocation = "Application";
     options.TreatDegradedAsSuccess = false;
 })
-    .AddApplicationInsightsAvailabilityPublisher(options =>
+.AddApplicationInsightsAvailabilityPublisher(options =>
 {
     options.TestNamePrefix = "AspNetHealthCheck";
     options.TestRunLocation = "Application";
