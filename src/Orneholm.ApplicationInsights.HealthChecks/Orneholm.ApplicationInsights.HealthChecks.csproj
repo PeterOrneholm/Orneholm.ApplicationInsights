@@ -17,7 +17,7 @@
     <FileVersion Condition="'$(BUILD_BUILDNUMBER)' != ''">$(VersionPrefix).$(BUILD_BUILDNUMBER)</FileVersion>
 
     <Description>Enable pushing of healt h checks reports from ASP.NET Core to Application Insights Av.</Description>
-    <PackageTags>aspnet;healtchecks;azure;applicationinsights;monitoring</PackageTags>
+    <PackageTags>aspnet;healthchecks;azure;applicationinsights;monitoring</PackageTags>
 
     <Authors>Peter Örneholm</Authors>
     <Copyright>Copyright © Peter Örneholm</Copyright>
