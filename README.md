@@ -27,8 +27,8 @@ Then, in your `Startup.cs`, where you register your services, add the Applicatio
 ```csharp
 services.AddHealthChecks()
         .AddCheck("SampleCheck1", () => HealthCheckResult.Healthy())
-		.AddCheck("SampleCheck2", () => HealthCheckResult.Degraded())
-		.AddCheck("SampleCheck3", () => HealthCheckResult.Unhealthy())
+	.AddCheck("SampleCheck2", () => HealthCheckResult.Degraded())
+	.AddCheck("SampleCheck3", () => HealthCheckResult.Unhealthy())
         .AddApplicationInsightsAggregatedAvailabilityPublisher()
         .AddApplicationInsightsAvailabilityPublisher();
 ```
