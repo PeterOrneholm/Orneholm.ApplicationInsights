@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -44,6 +43,7 @@ namespace Orneholm.ApplicationInsights.HealthChecks
 
             AddHealthChecksStatuses(availabilityTelemetry, report);
             AddHealthChecksDurations(availabilityTelemetry, report);
+            AddHealthChecksDescriptions(availabilityTelemetry, report);
             
             return availabilityTelemetry;
         }
@@ -69,6 +69,15 @@ namespace Orneholm.ApplicationInsights.HealthChecks
             foreach (var status in statuses)
             {
                 telemetry.Properties.Add(status);
+            }
+        }
+
+        private static void AddHealthChecksDescriptions(AvailabilityTelemetry telemetry, HealthReport report)
+        {
+            var descriptions = report.Entries.ToDictionary(x => $"HealthCheck-Description-{x.Key}", x => x.Value.Description ?? string.Empty);
+            foreach (var description in descriptions)
+            {
+                telemetry.Properties.Add(description);
             }
         }
     }

@@ -33,7 +33,7 @@ services.AddHealthChecks()
         .AddApplicationInsightsAvailabilityPublisher();
 ```
 
-- `.AddApplicationInsightsAggregatedAvailabilityPublisher()`: This will aggregate all health check reports into one availability telemetry and send it to Application Insights. Only contains general details and detyails on status, duration and description for each check.
+- `.AddApplicationInsightsAggregatedAvailabilityPublisher()`: Aggregate all health check reports into one availability telemetry and send it to Application Insights. Only contains general details and details on status, duration and description for each health check.
 - `.AddApplicationInsightsAvailabilityPublisher()`: This will publish each health check report as individual availability telemetry and send it to Application Insights. Contains more details such as data returned from each check.
 
 Both of them can be used side by side, to get one item for the general health of the system and then multiple ones with more details.
