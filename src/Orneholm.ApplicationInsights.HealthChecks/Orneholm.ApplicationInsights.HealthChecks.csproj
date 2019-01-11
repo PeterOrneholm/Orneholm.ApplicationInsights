@@ -16,7 +16,7 @@
     <!--<VersionSuffix>rc-1</VersionSuffix>-->
     <FileVersion Condition="'$(BUILD_BUILDNUMBER)' != ''">$(VersionPrefix).$(BUILD_BUILDNUMBER)</FileVersion>
 
-    <Description>ASP.NET Core Health check publisher for Azure Application Insights that will puslibsh the health check reports as availibility telemetry, including details and data.</Description>
+    <Description>ASP.NET Core Health check publisher for Azure Application Insights that will publish the health check reports as availibility telemetry, including details and data.</Description>
     <PackageTags>aspnet;healthchecks;azure;applicationinsights;monitoring</PackageTags>
 
     <Authors>Peter Örneholm</Authors>

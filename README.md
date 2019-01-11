@@ -1,6 +1,6 @@
 # Orneholm - Application Insights - Health Checks
 
-ASP.NET Core Health check publisher for Azure Application Insights that will puslibsh the health check reports as availibility telemetry, including details and data.
+ASP.NET Core Health check publisher for Azure Application Insights that will publish the health check reports as availibility telemetry, including details and data.
 As described in the [Microsoft Docs](https://docs.microsoft.com/en-us/azure/azure-monitor/app/monitor-web-app-availability#alert-on-custom-analytics-queries) custom availibility telemetry does not show up in all dashboards, but you can easily trigger alerts on them and show data by custom Log Analytics queries.
 
 ## Install
