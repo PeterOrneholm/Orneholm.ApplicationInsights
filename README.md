@@ -59,3 +59,9 @@ You can customize some options, by using an overload:
     options.TreatDegradedAsSuccess = false;
 });
 ```
+### Troubleshooting
+If you are running ASP.NET Core 2.2 and have an issue where the health check results are not sent to Application Insights you might be affected by a [bug](https://github.com/aspnet/Extensions/issues/639).
+The workaround is to add the following line after you call services.AddHealthChecks() in ConfigureServices
+```csharp
+services.TryAddEnumerable(ServiceDescriptor.Singleton(typeof(IHostedService), typeof(HealthCheckPublisherOptions).Assembly.GetType("Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckPublisherHostedService")));
+```
