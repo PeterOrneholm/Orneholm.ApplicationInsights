@@ -59,7 +59,7 @@ namespace Orneholm.ApplicationInsights.HealthChecks
         {
             foreach (var data in entry.Data)
             {
-                telemetry.Properties.Add($"HealthCheck-Data-{data.Key}", data.Value?.ToString()?? "<null>");
+                telemetry.Properties.Add($"HealthCheck-Data-{data.Key}", data.Value?.ToString() ?? "<null>");
             }
         }
     }
