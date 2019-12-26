@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
@@ -22,7 +22,7 @@ namespace Orneholm.ApplicationInsights.HealthChecks
         /// <param name="builder">The <see cref="IHealthChecksBuilder"/>to use.</param>
         /// <param name="options">Options that can bu customized.</param>
         /// <returns></returns>
-        public static IHealthChecksBuilder AddApplicationInsightsAvailabilityPublisher(this IHealthChecksBuilder builder, Action<ApplicationInsightsAvailibilityPublisherOptions> options)
+        public static IHealthChecksBuilder AddApplicationInsightsAvailabilityPublisher(this IHealthChecksBuilder builder, Action<ApplicationInsightsAvailibilityPublisherOptions>? options)
         {
             if (options != null)
             {
@@ -51,7 +51,7 @@ namespace Orneholm.ApplicationInsights.HealthChecks
         /// <param name="builder">The <see cref="IHealthChecksBuilder"/>to use.</param>
         /// <param name="options">Options that can bu customized.</param>
         /// <returns></returns>
-        public static IHealthChecksBuilder AddApplicationInsightsAggregatedAvailabilityPublisher(this IHealthChecksBuilder builder, Action<ApplicationInsightsAggregatedAvailibilityPublisherOptions> options)
+        public static IHealthChecksBuilder AddApplicationInsightsAggregatedAvailabilityPublisher(this IHealthChecksBuilder builder, Action<ApplicationInsightsAggregatedAvailibilityPublisherOptions>? options)
         {
             if (options != null)
             {
