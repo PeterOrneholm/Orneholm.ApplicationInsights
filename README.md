@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-orange.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://dev.azure.com/orneholm/Orneholm.ApplicationInsights/_apis/build/status/Orneholm.ApplicationInsights?branchName=master)](https://dev.azure.com/orneholm/Orneholm.ApplicationInsights/_build/latest?definitionId=5&branchName=master)
-[![NuGet](https://img.shields.io/nuget/v/Orneholm.ApplicationInsights-HealthChecks.svg)](https://www.nuget.org/packages/Orneholm.ApplicationInsights.HealthChecks/)
+[![NuGet](https://img.shields.io/nuget/v/Orneholm.ApplicationInsights.HealthChecks.svg)](https://www.nuget.org/packages/Orneholm.ApplicationInsights.HealthChecks/)
 [![Twitter Follow](https://img.shields.io/badge/Twitter-@PeterOrneholm-blue.svg?logo=twitter)](https://twitter.com/PeterOrneholm)
 
 ASP.NET Core Health check publisher for Azure Application Insights that will publish the health check reports as availibility telemetry, including details and data.
@@ -18,7 +18,6 @@ Orneholm.ApplicationInsights.HealthChecks is distributed as [packages on NuGet](
 ```console
 dotnet add package ApplicationInsights.HealthChecks
 ```
-
 
 ## Getting started
 
