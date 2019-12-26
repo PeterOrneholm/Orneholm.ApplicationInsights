@@ -1,0 +1,132 @@
+# Azure DevOps Pipeline
+
+name: $(Date:yyyyMMdd)$(Rev:r)
+
+variables:
+  dotnetBuildConfiguration: 'Release'
+  dotnetVerbosity: 'Detailed'
+
+trigger:
+- master
+
+stages:
+- stage: BuildNuget
+  displayName:  'Build NuGet packages'
+  jobs:
+  - job: BuildTestPackageNuGet
+    displayName: 'Build'
+    strategy:
+      matrix:
+        Windows:
+          vmImage: 'windows-latest'
+          artifactName: 'nuget-windows'
+        macOS:
+          vmImage: 'macOS-latest'
+          artifactName: 'nuget-macos'
+        Linux:
+          vmImage: 'ubuntu-latest'
+          artifactName: 'nuget-linux'
+      maxParallel: 3
+
+    pool:
+      vmImage: '$(vmImage)'
+
+    variables:
+      pathToBuildProjects: '**/**/*.*sproj'
+      pathToTestProjects: '**/test/**/*.Test.*sproj'
+      pathToPackProjects: '**/src/**/*.*sproj'
+      pathToNugetPackages: '**/*.nupkg'
+
+      sourceRepositoryBranch: '$(Build.SourceBranchName)'
+      sourceRepositoryCommit: '$(Build.SourceVersion)'
+
+    steps:
+
+    - task: UseDotNet@2
+      displayName: 'Install: .NET Core SDK'
+      inputs:
+        useGlobalJson: true
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet restore'
+      inputs:
+        command: restore
+        projects: '$(pathToBuildProjects)'
+        arguments: '--verbosity $(dotnetVerbosity)'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet build'
+      inputs:
+        command: build
+        projects: '$(pathToBuildProjects)'
+        arguments: '--configuration $(dotnetBuildConfiguration) --verbosity $(dotnetVerbosity)'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet pack: ci'
+      inputs:
+        command: custom
+        custom: pack
+        projects: '$(pathToPackProjects)'
+        arguments: '--output "$(Build.ArtifactStagingDirectory)/ci" --configuration $(dotnetBuildConfiguration) --verbosity $(dotnetVerbosity) /p:Configuration=$(dotnetBuildConfiguration) /p:RepositoryBranch=$(sourceRepositoryBranch) /p:RepositoryCommit=$(sourceRepositoryCommit) /p:VersionSuffix=ci-$(Build.BuildNumber)'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet pack: release'
+      inputs:
+        command: custom
+        custom: pack
+        projects: '$(pathToPackProjects)'
+        arguments: '--output "$(Build.ArtifactStagingDirectory)/release" --configuration $(dotnetBuildConfiguration) --verbosity $(dotnetVerbosity) /p:Configuration=$(dotnetBuildConfiguration) /p:RepositoryBranch=$(sourceRepositoryBranch) /p:RepositoryCommit=$(sourceRepositoryCommit)'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet test'
+      inputs:
+        command: test
+        projects: '$(pathToTestProjects)'
+        arguments: '--configuration $(dotnetBuildConfiguration) --collect "Code coverage"'
+
+    - publish: '$(Build.ArtifactStagingDirectory)'
+      artifact: '$(artifactName)'
+
+- stage: BuildSamples
+  displayName:  'Build samples'
+  dependsOn: []
+  jobs:
+  - job: BuildTestSamples
+    displayName: 'Build'
+    strategy:
+      matrix:
+        Windows:
+          vmImage: 'windows-latest'
+          artifactName: 'samples-windows'
+        macOS:
+          vmImage: 'macOS-latest'
+          artifactName: 'samples-macos'
+        Linux:
+          vmImage: 'ubuntu-latest'
+          artifactName: 'samples-linux'
+      maxParallel: 3
+
+    pool:
+      vmImage: '$(vmImage)'
+
+    variables:
+      pathToPublishProjects: '**/samples/**/*.*sproj'
+
+    steps:
+
+    - task: UseDotNet@2
+      displayName: 'Install: .NET Core SDK'
+      inputs:
+        useGlobalJson: true
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet publish'
+      inputs:
+        command: publish
+        publishWebProjects: false
+        zipAfterPublish: true
+        projects: '$(pathToPublishProjects)'
+        arguments: '--configuration $(dotnetBuildConfiguration) --output $(build.artifactstagingdirectory)'
+
+    - publish: '$(Build.ArtifactStagingDirectory)'
+      artifact: '$(artifactName)'

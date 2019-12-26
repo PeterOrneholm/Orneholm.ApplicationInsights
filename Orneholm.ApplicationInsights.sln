@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.168
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orneholm.ApplicationInsights.HealthChecks.Sample", "samples\Orneholm.ApplicationInsights.HealthChecks.Sample\Orneholm.ApplicationInsights.HealthChecks.Sample.csproj", "{F568FC9C-6684-4A9E-AEAC-B6F17A8F8D01}"
 EndProject
@@ -13,12 +13,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CB8CB1EB-329
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{221D7791-8A3F-4914-A4A6-FFE86882512E}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		.gitignore = .gitignore
+		azure-pipelines.yml = azure-pipelines.yml
+		CODE_OF_CONDUCT.md = CODE_OF_CONDUCT.md
+		CONTRIBUTING.md = CONTRIBUTING.md
+		global.json = global.json
 		LICENSE.md = LICENSE.md
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orneholm.ApplicationInsights.HealthChecks", "src\Orneholm.ApplicationInsights.HealthChecks\Orneholm.ApplicationInsights.HealthChecks.csproj", "{58853998-13F1-4AB4-A1A4-CEACF4F77084}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orneholm.ApplicationInsights.HealthChecks", "src\Orneholm.ApplicationInsights.HealthChecks\Orneholm.ApplicationInsights.HealthChecks.csproj", "{58853998-13F1-4AB4-A1A4-CEACF4F77084}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{A3411ED2-1347-42FC-B8F0-8A4EC464BE5E}"
+	ProjectSection(SolutionItems) = preProject
+		.github\pull_request_template.md = .github\pull_request_template.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +51,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F568FC9C-6684-4A9E-AEAC-B6F17A8F8D01} = {DD2CFB0B-82A3-4D00-A745-573A2AB29A2B}
 		{58853998-13F1-4AB4-A1A4-CEACF4F77084} = {CB8CB1EB-3299-4A8E-A978-EC8EE3D70182}
+		{A3411ED2-1347-42FC-B8F0-8A4EC464BE5E} = {221D7791-8A3F-4914-A4A6-FFE86882512E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A7354875-208C-4A57-913F-B0813D7091E6}
