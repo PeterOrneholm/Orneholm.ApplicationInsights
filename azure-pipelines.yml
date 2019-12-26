@@ -123,7 +123,7 @@ stages:
       displayName: 'dotnet publish'
       inputs:
         command: publish
-        publishWebProjects: false
+        publishWebProjects: true
         zipAfterPublish: true
         projects: '$(pathToPublishProjects)'
         arguments: '--configuration $(dotnetBuildConfiguration) --output $(build.artifactstagingdirectory)'
