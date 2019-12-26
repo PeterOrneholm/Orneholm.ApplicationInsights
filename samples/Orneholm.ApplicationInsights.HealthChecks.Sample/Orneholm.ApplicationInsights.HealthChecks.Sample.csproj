@@ -1,20 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-  <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-    <ApplicationInsightsResourceId>/subscriptions/60546205-7d7a-459c-8734-c3fde58f8aa1/resourcegroups/po-aihealth-prod/providers/microsoft.insights/components/po-aihealth-prod</ApplicationInsightsResourceId>
-    <ApplicationInsightsAnnotationResourceId>/subscriptions/60546205-7d7a-459c-8734-c3fde58f8aa1/resourcegroups/po-aihealth-prod/providers/microsoft.insights/components/po-aihealth-prod</ApplicationInsightsAnnotationResourceId>
-    <UserSecretsId>e8e63499-1324-431e-ac8c-e5ff2fccf711</UserSecretsId>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <UserSecretsId>e8e63499-1324-431e-ac8c-e5ff2fccf711</UserSecretsId>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="2.2.0" />
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-  </ItemGroup>
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Orneholm.ApplicationInsights.HealthChecks\Orneholm.ApplicationInsights.HealthChecks.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="3.0.0" />
+        <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.12.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Orneholm.ApplicationInsights.HealthChecks\Orneholm.ApplicationInsights.HealthChecks.csproj" />
+    </ItemGroup>
 </Project>

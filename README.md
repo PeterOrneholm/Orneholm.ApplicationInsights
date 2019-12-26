@@ -24,10 +24,12 @@ dotnet add package ApplicationInsights.HealthChecks
 To get started, configure your ASP.NET Core app to use Application Insights:
 
 ```csharp
-public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-    WebHost.CreateDefaultBuilder(args)
-            .UseApplicationInsights()
-            .UseStartup<Startup>();
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddApplicationInsightsTelemetry(Configuration);
+
+    ...
+}
 ```
 
 Then, in your `Startup.cs`, where you register your services, add the Application Insights Availability Publisher:
