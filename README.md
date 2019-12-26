@@ -16,7 +16,7 @@ https://peter.orneholm.com/post/181922490118/introducing-orneholmapplicationinsi
 Orneholm.ApplicationInsights.HealthChecks is distributed as [packages on NuGet](https://www.nuget.org/profiles/PeterOrneholm), install using the tool of your choice, for example _dotnet cli_.
 
 ```console
-dotnet add package ApplicationInsights.HealthChecks
+dotnet add package Orneholm.ApplicationInsights.HealthChecks
 ```
 
 ## Getting started
