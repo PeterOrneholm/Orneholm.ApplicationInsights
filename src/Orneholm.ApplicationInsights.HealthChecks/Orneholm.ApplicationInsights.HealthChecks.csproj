@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFrameworks>netstandard2.0</TargetFrameworks>
         <LangVersion>latest</LangVersion>
@@ -11,13 +11,10 @@
         <PackageId>Orneholm.ApplicationInsights.HealthChecks</PackageId>
 
         <VersionPrefix>1.0.0</VersionPrefix>
-        <VersionSuffix>beta-1</VersionSuffix>
+        <!--<VersionSuffix>beta-1</VersionSuffix>-->
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <FileVersion Condition="'$(BUILD_BUILDNUMBER)' == ''">$(VersionPrefix).0</FileVersion>
         <FileVersion Condition="'$(BUILD_BUILDNUMBER)' != ''">$(VersionPrefix).$(BUILD_BUILDNUMBER)</FileVersion>
-
-        <SignAssembly>true</SignAssembly>
-        <AssemblyOriginatorKeyFile>StrongNameKey.snk</AssemblyOriginatorKeyFile>
 
         <Description>ASP.NET Core Health check publisher for Azure Application Insights that will publish the health check reports as availibility telemetry, including details and data.</Description>
         <PackageTags>aspnet;healthchecks;azure;applicationinsights;monitoring</PackageTags>
@@ -45,7 +42,7 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.ApplicationInsights" Version="2.12.0" />
-        <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="3.1.0" />
+        <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="3.1.1" />
     </ItemGroup>
 
     <ItemGroup>
